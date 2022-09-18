@@ -275,3 +275,7 @@ npm如果太慢的话 可以用cnpm，就可以不用翻墙 用的是国内的�
 
 将node_moudules和dist添加到.gitignore文件中 太大没上传 麻烦且怕远程仓库受不了
 
+​	
+
+## 3-3 Vue-DevTools安装使用
+
