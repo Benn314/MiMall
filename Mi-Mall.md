@@ -354,6 +354,38 @@ jsonp不是请求 只是一段js脚本 所以访问慕课网成功 axios访问�
 
 jsonp请求不是一个真正的请求
 
+```vue
+<script>
+// import HelloWorld from './components/HelloWorld.vue'
+// import axios from 'axios'
+import jsonp from 'jsonp'
+
+export default {
+  name: 'app',
+  components: {
+
+  },
+  data(){
+    return{
+      
+    }
+  },
+  mounted(){
+    let url = '/api/activity/servicetime'
+    // axios本身是一个promise的结构 所以我们可以通过.then的方式去做链式调用
+    // axios.get(url).then(()=>{
+      
+    // })
+    jsonp(url,(err, res)=>{
+      let result = res;
+      this.data = result;
+    })
+
+  }
+}
+</script>
+```
+
 ​	
 
 ## 4-3 跨域-接口代理
@@ -401,3 +433,28 @@ status不返回非0是不正常的
 ![image-20220920092223567](Mi-Mall.assets/image-20220920092223567.png)
 
 ![image-20220920092157415](Mi-Mall.assets/image-20220920092157415.png)
+
+​	
+
+## 4-5 目录结构设置
+
+```api
+这里建议把大图片放在public里面 把小图片放在assets里面
+
+api接口文件夹 index.js 放我们整个项目的api请求 地址统一管理
+
+util index.js 格式化 文字/数字转换 把公共方法放util里面去
+
+storage 是我们前端用的比较频繁的 他是我们数据存储的对象 index.js 怎么去存值取值删除值
+
+因为我们项目会用到vuex 所以我们建一个store文件夹 vuex后面会详细讲解 这里到时候会分几层级结构
+
+路由看情况 文件多就建个router文件夹 文件只有一个就直接建router.js
+```
+
+---
+
+大概项目雏形就如上所述 其实还有环境变量的设置 等讲到环境变量的时候再进行讲解设置
+
+任何项目结构都不是一成不变 根据业务情况（增加/减少）进行微调，现在是根据设计稿和以往经验搭一个雏形
+
