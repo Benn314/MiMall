@@ -512,4 +512,11 @@ https://tdesign.tencent.com/starter/vue/#/dashboard/base
 
 ​	
 
+## 4-7 路由封装
+
+主要是对router.js与组件的编辑
+
 routes 配置子路由/路由列表
+
+​	
+
