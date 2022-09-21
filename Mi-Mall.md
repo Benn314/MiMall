@@ -466,3 +466,50 @@ storage 是我们前端用的比较频繁的 他是我们数据存储的对象 i
 
 ![image-20220920170011604](Mi-Mall.assets/image-20220920170011604.png)
 
+​	
+
+```html
+6.失败的一天 一天没学习 出现是scss错误知道是在哪里了，在App.vue中的style样式 scope引入scss 但并没有先npm install 导致 found not module
+7.安装插件小合集：
+npm install vue-lazyload@1.3.3 --save-dev
+npm install element-ui@2.13.0 --save-dev
+8.四、没有清理缓存
+每次装包失败报错后记得都要 npm uninstall xxx 清除装包错误留下的缓存。
+比如 npm i -D node-sass 报错了，就要执行一遍 npm uninstall node-sass，然后再重新安装。
+9.sudo是mac下输入密码验证身份的命令，因此windows用户应该是以管理员身份运行命令行工具，然后删除sudo即可。
+举个例子：删除版本mac下是sudo n rm 版本号，windows下应该是n rm 版本号。
+10.npm install node-sass@4.13.0 --save-dev
+11.今日mvp！！！！！！！！！！！
+【npm install node-sass死活安装不上，最后终于搞定】
+https://blog.csdn.net/wk964269669/article/details/72845651?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-72845651-blog-125441010.pc_relevant_multi_platform_whitelistv6&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-72845651-blog-125441010.pc_relevant_multi_platform_whitelistv6&utm_relevant_index=2
+```
+
+​	
+
+https://tdesign.tencent.com/starter/vue/#/dashboard/base
+
+![image-20220920171104685](Mi-Mall.assets/image-20220920171104685.png)
+
+​	
+
+起飞！如何用nvm控制版本nodejs 下方两篇文章教学
+
+[将nodejs的高版本降级为低版本（切换node版本）](https://juejin.cn/post/7094576504243224612)
+
+[nvm安装，nvm use 一直报错exit status 1 或 exit status 145 问题？](https://wuhou.fun/390.html)
+
+​	
+
+今日mvp！！
+
+[npm install node-sass死活安装不上，最后终于搞定](https://blog.csdn.net/wk964269669/article/details/72845651?spm=1001.2101.3001.6650.1&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-72845651-blog-125441010.pc_relevant_multi_platform_whitelistv6&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-72845651-blog-125441010.pc_relevant_multi_platform_whitelistv6&utm_relevant_index=2)
+
+​	
+
+![image-20220920203158231](Mi-Mall.assets/image-20220920203158231.png)
+
+​	
+
+​	
+
+routes 配置子路由/路由列表
