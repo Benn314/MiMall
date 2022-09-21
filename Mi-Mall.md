@@ -514,9 +514,60 @@ https://tdesign.tencent.com/starter/vue/#/dashboard/base
 
 ## 4-7 路由封装
 
-主要是对router.js与组件的编辑
+主要是对router.js与组件的编辑配置
 
 routes 配置子路由/路由列表
 
 ​	
 
+## 4-8 Storage封装
+
+![image-20220921130503611](Mi-Mall.assets/image-20220921130503611.png)
+
+![image-20220921143423464](Mi-Mall.assets/image-20220921143423464.png)
+
+现在后端的些报文会放到前端存储 导致cookie可能有点不够用了 cookie设置了它的域名、规定时间、路径，然后把cookie值存进去，然后cookie会发送到服务器端
+
+所以cookie针对大段报文来说 用storage比较好
+
+cookie有规定时间 例如有效期7天/30天过期等等，过期之后要重新登录而   localStorage不会，localStorage在浏览器端存储（存本地unit存储里了） ，sessionStorage是绘画技术，sessionStorage是在浏览器里面存的，浏览器关闭就没了
+
+​	
+
+例如这里就是前端发送给服务器的，这就是前端发送给服务器的cookie技术，而这个发送不是我们手动去发送的，而是服务器自动去浏览器端的cookie，自动发送给服务端
+
+![image-20220921145211522](Mi-Mall.assets/image-20220921145211522.png)
+
+![image-20220921150005478](Mi-Mall.assets/image-20220921150005478.png)
+
+sessionStorage也是存储内存中的
+
+cookie有路径限制 例如写在./A下面 ./B下就看不到这个cookie了
+
+而Storage是没有这种限制的，例如写在https://www.csdn.net/这个根路径（域名）中，不管在哪里子路径都可以看到这个Storage
+
+cookie的API稍微模糊一些，通过document.cookie去设置它的域名他的规定时间它有点路径等等，不像Storage 我们可以写个值 例如setItem keyvalue一个非常清晰的keyvalue去帮助我们存储它的值
+
+以上便是cookie和Storage的关系与区别
+
+而localStorage和sessionStorage也讲了区别，localStorage是本地unit存储 而sessionStorage是内存存储 sessionStorage会随着浏览器关闭而关闭，而localStorage不会 这是他们一些区别和联系
+
+![image-20220921151341607](Mi-Mall.assets/image-20220921151341607.png)
+
+![image-20220921151618040](Mi-Mall.assets/image-20220921151618040.png)
+
+![image-20220921151753537](Mi-Mall.assets/image-20220921151753537.png)
+
+![image-20220921152819404](Mi-Mall.assets/image-20220921152819404.png)
+
+![image-20220921152836186](Mi-Mall.assets/image-20220921152836186.png)
+
+注意规范的使用 给webpack用的是config的规范例如vue.config.js 给代码项目用的是es6的规范
+
+![image-20220921154534957](Mi-Mall.assets/image-20220921154534957.png)
+
+![image-20220921161202478](Mi-Mall.assets/image-20220921161202478.png)
+
+![image-20220921162530360](Mi-Mall.assets/image-20220921162530360.png)
+
+操作key一个就够了 别写一堆

@@ -5,34 +5,21 @@
 </template>
 
 <script>
+import storage from './storage'
 export default {
-  name: 'app'
-//   components: {
-    
-//   },
-//   data(){
-//     return {
-      
-//     }
-//   },
-//   mounted(){
-//     if(this.$cookie.get('userId')){
-//       this.getUser();
-//       this.getCartCount();
-//     }
-//   },
-//   methods:{
-//     getUser(){
-//       this.axios.get('/user').then((res={})=>{
-//         this.$store.dispatch('saveUserName',res.username);
-//       })
-//     },
-//     getCartCount(){
-//       this.axios.get('/carts/products/sum').then((res=0)=>{
-//         this.$store.dispatch('saveCartCount',res);
-//       })
-//     }
-//   }
+  name: 'app',
+  data(){
+    return {
+
+    }
+  },
+  mounted(){
+    // storage.setItem('a',1);
+    // storage.setItem('user',{a:1}); // 这样是直接覆盖掉user了，不符合我们要追加数据的要求
+    // storage.setItem("abc",{a:1},"user"); //用到第三个参数属性 这才是追加
+    // storage.clear('a');
+    storage.clear('a','user');
+  }
 }
 </script>
 
