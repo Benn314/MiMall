@@ -641,3 +641,55 @@ response.data.data才是我们接口返回的值
 ![image-20220922005842333](Mi-Mall.assets/image-20220922005842333.png)
 
 ![image-20220922005914614](Mi-Mall.assets/image-20220922005914614.png)
+
+​	
+
+## 4-10 接口环境设置
+
+代理方式是最简单最安全的方式
+
+![image-20220922112639552](Mi-Mall.assets/image-20220922112639552.png)
+
+跨域方式不同 配置不同，baseURL的书写也不一样 出了问题难当责任，所以我们这节课把环境封装成一个模块 统一进行管理
+
+多了解一下webpack的基本配置信息 打包
+
+![image-20220922113342487](Mi-Mall.assets/image-20220922113342487.png)
+
+![image-20220922113347386](Mi-Mall.assets/image-20220922113347386.png)
+
+​	
+
+switch (process.env.NODE_ENV) { // process.env.NODE_ENV可以获取--mode（package.json）传递过来的参数（环境变量） 可以去node.js官方文档查阅相关知识点，而为什么我们可以取到nodejs的环境变量呢？因为我们项目本身就是在node的服务器运行起来的
+
+接口代理的配置信息可以在vue.config.js中修改
+
+本节重点讲环境变量怎么去配置
+
+![image-20220922115021208](Mi-Mall.assets/image-20220922115021208.png)
+
+有两点需要大家注意 我们--mode的参数不能随便写，开发环境只能叫development、生产环境只能叫production 要自定义也可以 待会讲
+
+![image-20220922115813147](Mi-Mall.assets/image-20220922115813147.png)
+
+正确写法如下图 不然报 找不到依赖错误
+
+![image-20220922115922254](Mi-Mall.assets/image-20220922115922254.png)
+
+​	
+
+![image-20220922121356852](Mi-Mall.assets/image-20220922121356852.png)
+
+更换测试环境（环境设置）
+
+如果我们在建的时候 test不生效，可以建一个 .env.test 将环境变量注入进去 （因为有时一些配置信息不生效）
+
+![image-20220922121641358](Mi-Mall.assets/image-20220922121641358.png)
+
+然后这样的话他就可以加载成功了
+
+![image-20220922142818170](Mi-Mall.assets/image-20220922142818170.png)
+
+![image-20220922142823559](Mi-Mall.assets/image-20220922142823559.png)
+
+prev 是预发布版本

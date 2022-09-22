@@ -10,13 +10,19 @@ var _vueAxios = _interopRequireDefault(require("vue-axios"));
 
 var _App = _interopRequireDefault(require("./App.vue"));
 
+var _env = _interopRequireDefault(require("./env"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // 根据前端的跨域方式做调整 /a/b :  /api/a/b => /a/b
 // 非接口代理 后端域名和前端域名不完整 url要写完整
-_axios["default"].defaults.baseURL = '/api'; // 转发的时候会把/api切掉
+// CORS、JSONP 和 接口代理 的两种baseURL写法是不同的
+// axios.defaults.baseURL = 'http://test-www.imooc.com/api'; // CORS、JSONP跨域
+_axios["default"].defaults.baseURL = '/api'; // 接口代理 转发的时候会把/api切掉
 
-_axios["default"].defaults.timeout = 8000; //接口错误拦截
+_axios["default"].defaults.timeout = 8000; // 根据环境变量获取不同的请求地址
+
+_axios["default"].defaults.baseURL = _env["default"].baseURL; //接口错误拦截
 
 _axios["default"].interceptors.response.use(function (response) {
   var res = response.data;
