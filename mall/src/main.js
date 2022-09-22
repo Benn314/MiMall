@@ -1,8 +1,27 @@
 import Vue from 'vue'
 import router from './router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import App from './App.vue'
 
-Vue.config.productionTip = false
+// 根据前端的跨域方式做调整 /a/b :  /api/a/b => /a/b
+// 非接口代理 后端域名和前端域名不完整 url要写完整
+axios.defaults.baseURL = '/api'; // 转发的时候会把/api切掉
+axios.defaults.timeout = 8000;
+//接口错误拦截
+axios.interceptors.response.use(function(response){
+    let res = response.data;
+    if(res.status == 0){
+        return res.data;
+    }else if(res.status == 10){
+        window.location.href = '/#/login';
+    }else{
+        alert(res.msg);
+    }
+})
+
+Vue.use(VueAxios,axios);    //挂载上去后我们待会发请求就可以通过js发请求了
+Vue.config.productionTip = false    //生产方式的提示
 
 new Vue({
     router,
