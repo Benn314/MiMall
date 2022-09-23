@@ -5,12 +5,12 @@
 </template>
 
 <script>
-import storage from './storage'
+// import storage from './storage'
 export default {
   name: 'app',
   data(){
     return {
-
+      res:{}
     }
   },
   mounted(){
@@ -18,8 +18,21 @@ export default {
     // storage.setItem('user',{a:1}); // 这样是直接覆盖掉user了，不符合我们要追加数据的要求
     // storage.setItem("abc",{a:1},"user"); //用到第三个参数属性 这才是追加
     // storage.clear('a');
-    storage.clear('a','user');
-  }
+    // storage.clear('a','user');
+
+    // mock的三种设置
+    // 1.本地加载请求静态json文件的形式
+    // this.axios.get('/mock/user/login.json').then((res)=>{
+    //   this.res = res;
+    // });
+    // 2.通过easy-mock平台实现数据mock
+    // this.axios.get('/user/login').then((res)=>{
+    //   this.res = res;
+    // });
+    // 3.本地集成mockjs（npm插件来着）实现数据mock
+    this.axios.get('/user/login').then((res)=>{
+      this.res = res;
+    });  }
 }
 </script>
 
