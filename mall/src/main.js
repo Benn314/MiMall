@@ -6,7 +6,7 @@ import App from './App.vue'
 // import env from './env'
 
 // mockjs使代码污染性变小
-const mock = false; // 在这里设置mock开关 当我们联调、测试时就不需要mock了
+const mock = true; // 在这里设置mock开关 当我们联调、测试时就不需要mock了
 if(mock){
     require('./mock/api')   // 这里用require，不用import
 }

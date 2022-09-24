@@ -36,6 +36,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+@import './assets/scss/reset.scss'
 </style>
