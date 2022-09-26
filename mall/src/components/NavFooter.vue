@@ -1,6 +1,6 @@
 <template>
     <div>
-        nav-footer Benn314
+        <!-- nav-footer Benn314 -->
     </div>
 </template>
 
