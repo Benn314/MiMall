@@ -1,4 +1,4 @@
-早安哦！这里是小B每日早安推送~
+早安哦！这里是小楷每日早安推送~
 ------------------------------------------
 
 💓 可爱的：{{name.DATA}}🐽
@@ -8,14 +8,22 @@
 🌡️ 当前温度：{{now_temperature.DATA}} 
 🌕 今日最低温度：{{min_temperature.DATA}}
 🌞 今日最高温度：{{max_temperature.DATA}}  
-❤️ 我们已经恋爱：{{love_date.DATA}}  
+❤️ 我们已经认识了：{{love_date.DATA}} 
 🎂 距离你这个小笨蛋的生日还有：{{birthday.DATA}}  
 🍰 距离你的大笨蛋生日还有：{{my_birthday.DATA}}  
 
-💬 {{note.DATA}}
+💜 距离CET-4考试还有：{{meet_date.DATA}}
+
+💬@{{note.DATA}}
 🌈 新的一天也不要忘记ixh报平安喔！
 ʕ•̫͡•ʔ•̫͡•ཻʕ•̫͡•ʔ•͓͡•ʔʕ•̫͡•ʔ•̫͡•ཻʕ•̫͡•ʔ•͓͡•ʔʕ•̫͡•ʔ•̫͡•ཻʕ•̫͡•ʔ•͓͡•ʔ
 
+The story never end...
+[每天一遍，强化训练]
+Chinese:    "我是你哥！"
+English:      "I'm your brother!"
+Japanese:   "私はあなたの兄弟です"
+Korean:       "나는 당신의 형제입니다"
 
 【备注】模板实例
 早安哦！ |  小楷每日早安推送~
