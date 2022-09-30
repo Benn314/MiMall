@@ -1,74 +1,106 @@
 <template>
-    <div>
-        <div class="index">
-            <div class="container">
-                <div class="swiper-box">
-                    <div class="nav-menu">
-                        <ul class="menu-warp">
-                            <li class="menu-item">
-                                <!-- href="javascript:;" 禁止刷新 -->
-                                <a href="javascript:;">手机 电话卡</a>
-                                <div class="children">
-                                    <ul v-for="(item,index) in menuList" :key="index">
-                                        <li v-for="(sub,sub_index) in item" :key="sub_index">
-                                            <a :href="sub?'/#/product/'+sub.id:''">
-                                                <img :src="sub?sub.img : '/imgs/item-box-1.png'" alt="">
-                                                {{sub? sub.name : '小米9'}}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:;">电视 盒子</a>
-                                <!-- <div class="children"></div> -->
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:;">笔记本 平板</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:;">家电 插线板</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:;">出行 穿戴</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:;">智能 路由器</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:;">电源 配件</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="javascript:;">生活 箱包</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <swiper v-bind:options="swiperOption" >
-                        <swiper-slide v-for="(item,index) in slideList" :key="index">
-                            <a :href="'/#/product'+item.id">
-                                <img :src="item.img" alt="">
-                            </a>
-                        </swiper-slide>
-                        <!-- 因为slot在vue3.x中被弃用了，新增v-slot(可简写为#) v-slot插槽只能在template中使用且不能被div包裹-->
-                        <template #pagination>
-                            <div class="swiper-pagination"></div>
-                        </template>
-                        <template v-slot:button-prev>
-                            <div class="swiper-button-prev"></div>
-                        </template>
-                        <template #button-next>
-                            <div class="swiper-button-next"></div>
-                        </template>
-                    </swiper>
+<div>
+    <div class="index">
+        <div class="container">
+            <div class="swiper-box">
+                <div class="nav-menu">
+                    <ul class="menu-warp">
+                        <li class="menu-item">
+                            <!-- href="javascript:;" 禁止刷新 -->
+                            <a href="javascript:;">手机 电话卡</a>
+                            <div class="children">
+                                <ul v-for="(item,index) in menuList" :key="index">
+                                    <li v-for="(sub,sub_index) in item" :key="sub_index">
+                                        <a :href="sub?'/#/product/'+sub.id:''">
+                                            <img :src="sub?sub.img : '/imgs/item-box-1.png'" alt="">
+                                            {{sub? sub.name : '小米9'}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item">
+                            <a href="javascript:;">电视 盒子</a>
+                            <!-- <div class="children"></div> -->
+                        </li>
+                        <li class="menu-item">
+                            <a href="javascript:;">笔记本 平板</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="javascript:;">家电 插线板</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="javascript:;">出行 穿戴</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="javascript:;">智能 路由器</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="javascript:;">电源 配件</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="javascript:;">生活 箱包</a>
+                        </li>
+                    </ul>
                 </div>
-                <!-- 广告位的缩写 -->
-                <div class="ads-box"></div>
-                <div class="banner"></div>
-                <div class="product-box"></div>
+                <swiper v-bind:options="swiperOption" >
+                    <swiper-slide v-for="(item,index) in slideList" :key="index">
+                        <a :href="'/#/product'+item.id">
+                            <img :src="item.img" alt="">
+                        </a>
+                    </swiper-slide>
+                    <!-- 因为slot在vue3.x中被弃用了，新增v-slot(可简写为#) v-slot插槽只能在template中使用且不能被div包裹-->
+                    <template #pagination>
+                        <div class="swiper-pagination"></div>
+                    </template>
+                    <template v-slot:button-prev>
+                        <div class="swiper-button-prev"></div>
+                    </template>
+                    <template #button-next>
+                        <div class="swiper-button-next"></div>
+                    </template>
+                </swiper>
+            </div>
+            <!-- 广告位的缩写 -->
+            <div class="ads-box1">
+                <a v-bind:href="'/#/product'+item.id" v-for="(item,index) in adsList" v-bind:key="index">
+                    <img v-bind:src="item.img" alt="">
+                </a>
+            </div>
+            <div class="banner">
+                <a href="'/#/product'30">
+                    <img src="/imgs/banner-1.png" alt="">
+                </a>
             </div>
         </div>
-        <service-bar></service-bar>
+        <div class="product-box">
+            <div class="container">
+                <h2>手机</h2>
+                <div class="wrapper">
+                    <div class="banner-left">
+                        <a href="/#/product/35"><img src="/imgs/mix-alpha.jpg" alt=""></a>
+                    </div>
+                    <div class="list-box">
+                        <div class="list" v-for="(arr,i) in phoneList" :key="i">
+                            <div class="item" v-for="(item,j) in arr" :key="j">
+                                <span :class="{'new-pro':j%2==0}">新品</span>
+                                <div class="item-img">
+                                    <img :src="item.mainImage" alt="">
+                                </div>
+                                <div class="item-info">
+                                    <h3>{{item.name}}</h3>
+                                    <p>{{item.subtitle}}</p>
+                                    <p class="price">{{item.price}}元</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
     </div>
+    <service-bar></service-bar>
+</div>
 </template>
 
 <script>
@@ -91,8 +123,8 @@ export default {
                 cubeEffect: {
                     slideShadows: true, // 默认值：true
                     shadow: true, // 默认值：true
-                    shadowOffset: 100, // 默认值：20px
-                    shadowScale: 0.6 // 默认值：0.94
+                    // shadowOffset: 100, // 默认值：20px
+                    // shadowScale: 0.6 // 默认值：0.94
                 },
                 pagination: {
                     el: '.swiper-pagination',
@@ -147,7 +179,39 @@ export default {
                     }
                 ],
                 [0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]
-            ]
+            ],
+            adsList:[
+                {
+                    id:33,
+                    img:'/imgs/ads/ads-1.png'
+                },{
+                    id:48,
+                    img:'/imgs/ads/ads-2.jpg'
+                },{
+                    id:45,
+                    img:'/imgs/ads/ads-3.png'
+                },{
+                    id:47,
+                    img:'/imgs/ads/ads-4.jpg'
+                }
+            ],
+            phoneList:[]
+        }
+    },
+    // 初始化产品
+    mounted() {
+        this.init();
+    },
+    methods: {
+        init(){
+            this.axios.get('/products',{
+                params:{
+                    categoryId:100012,
+                    pageSize:8
+                }
+            }).then((res)=>{
+                this.phoneList = [res.list.slice(0,4),res.list.slice(4,8)];
+            })
         }
     },
 }
@@ -194,7 +258,7 @@ export default {
                         }
                         .children{
                             display: none;
-                            transition:width 2s, height 2s, background-color 2s, transform 2s;
+                            // transition:width 2s, height 2s, background-color 2s, transform 2s;
                             width:962px;
                             height: 451px;
                             background-color: $colorG;
@@ -209,7 +273,8 @@ export default {
                                 li{
                                     height: 75px;
                                     line-height: 75px;
-                                    width: 241px; // 或者flex:1 这样也是取每个都是平均值
+                                    flex:1;
+                                    // width: 241px; // 或者flex:1 这样也是取每个都是平均值
                                     padding-left: 23px;
                                 }
                                 a{
@@ -235,6 +300,103 @@ export default {
                 img{
                     width:100%;
                     height: 100%;
+                }
+            }
+        }
+        .ads-box1{
+            @include flex();
+            // margin-top: 14px;
+            margin-top: 31px;
+            margin-bottom: 31px;
+            a{
+                width:296px;
+                height: 167px;
+            }
+        }
+        .banner{
+            margin-bottom: 50px;
+        }
+        .product-box{
+            background-color: $colorJ;
+            padding: 30px 0 50px;
+            h2{
+                font-size: $fontF;
+                height: 21px;
+                line-height: 21px;
+                color: $colorB;
+                margin-bottom: 20px;
+            }
+            .wrapper{
+                display: flex;
+                .banner-left{
+                    margin-right: 16px;
+                }
+                img{
+                    width: 224px;
+                    height: 619px;
+                }
+            }
+            .list-box{
+                .list{
+                    @include flex();
+                    width: 986px;
+                    margin-bottom: 14px;
+                    &:last-child{
+                        margin-bottom:0px;
+                    }
+                    .item{
+                        width:236px;
+                        height: 302px;
+                        background-color: $colorG;
+                        text-align: center;
+                        span{
+                            display: inline-block;
+                            width: 67px;
+                            height: 24px;
+                            font-size:14px;
+                            line-height: 24px;
+                            color:$colorG;
+                            &.new-pro{
+                                background-color: #7ECF68;
+                            }
+                            &.kill-pro{
+                                background-color: #E82626;
+                            }
+
+                        }
+                        .item-img{
+                            img{
+                                width:100%;
+                                height: 195px;
+                            }
+                        }
+                        .item-info{
+                            h3{
+                                font-size: $fontJ;
+                                color:$colorB;
+                                line-height: $fontJ;
+                                font-weight: bold;
+                            }
+                            p{
+                                color:$colorD;
+                                line-height: 13px;
+                                margin:6px auto 13px;
+                            }
+                            .price{
+                                color: #F20A0A;
+                                font-size:$fontJ;
+                                font-weight:bold; // 加粗
+                                cursor:pointer;
+                                &:after{
+                                    @include bgImg(22px,22px,'/imgs/icon-cart-hover.png');
+                                    content:' ';
+                                    margin-left: 5px;
+                                    vertical-align:middle;
+                                }
+                            }
+                        }
+                    }
+
                 }
             }
         }
