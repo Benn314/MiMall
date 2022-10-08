@@ -64,12 +64,19 @@
             <!-- 广告位的缩写 -->
             <div class="ads-box1">
                 <a v-bind:href="'/#/product'+item.id" v-for="(item,index) in adsList" v-bind:key="index">
-                    <img v-bind:src="item.img" alt="">
+                    <!-- 用v-lazy后 它会自动给我们封装一个src 所以这里不用写 -->
+                    <img v-lazy="item.img" alt="">
+                    <!-- 如果我们没有v-lazy的话 用jquery怎么做呢？加data-img 将data-img值取出来赋值到src 
+                        作用原理都差不多 一开始不要给src赋值 把这图片滚出来的时候 我们再把src赋值上去 这个时候图片才会加载
+                        这个就是避免了同时并列加载n张图片到首屏 一旦你首屏加载了太多图片资源 就导致你的页面首页是空白的或者白屏
+                    -->
+                    <!-- <img v-lazy="item.img" data-img="" alt=""> -->
                 </a>
             </div>
             <div class="banner">
                 <a href="'/#/product'30">
-                    <img src="/imgs/banner-1.png" alt="">
+                <!-- 注意 凡是指令里面肯定是变量 类型是字符串的话需要用单引号括起来字符串-->
+                    <img v-lazy="'/imgs/banner-1.png'" alt="">
                 </a>
             </div>
         </div>
@@ -78,19 +85,19 @@
                 <h2>手机</h2>
                 <div class="wrapper">
                     <div class="banner-left">
-                        <a href="/#/product/35"><img src="/imgs/mix-alpha.jpg" alt=""></a>
+                        <a href="/#/product/35"><img v-lazy="'/imgs/mix-alpha.jpg'" alt=""></a>
                     </div>
                     <div class="list-box">
                         <div class="list" v-for="(arr,i) in phoneList" :key="i">
                             <div class="item" v-for="(item,j) in arr" :key="j">
                                 <span :class="{'new-pro':j%2==0}">新品</span>
                                 <div class="item-img">
-                                    <img :src="item.mainImage" alt="">
+                                    <img v-lazy="item.mainImage" alt="">
                                 </div>
                                 <div class="item-info">
                                     <h3>{{item.name}}</h3>
                                     <p>{{item.subtitle}}</p>
-                                    <p class="price">{{item.price}}元</p>
+                                    <p class="price" @click="addCart(item.id)">{{item.price}}元</p>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +112,9 @@
         sureText="查看购物车" 
         btnType="1" 
         modalType="middle" 
-        :showModal="true"
+        :showModal="showModal"
+        @submit="goToCart"
+        @cancel="showModal=false"
     >
         <!-- 新版本用template嵌套v-slot -->
         <template v-slot:body>
@@ -209,7 +218,8 @@ export default {
                     img:'/imgs/ads/ads-4.jpg'
                 }
             ],
-            phoneList:[]
+            phoneList:[],
+            showModal:false
         }
     },
     // 初始化产品
@@ -229,6 +239,21 @@ export default {
                 this.phoneList = [res.list.slice(0,4),res.list.slice(4,8)];
 
             })
+        },
+        addCart(){
+            // 等把登录模块做出来后 再搞添加购物车
+            this.showModal=true;
+            // this.axios.post('/carts',{
+            //     productId:id,
+            //     selected: true
+            // }).then(()=>{
+
+            // }).catch(()=>{ // 因为我们还未登录 所以可能出现提交不成功 先用catch捕获异常
+            //     this.showModal = true;
+            // })
+        },
+        goToCart(){
+            this.$router.push('/cart')
         }
     },
 }

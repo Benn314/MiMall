@@ -2,6 +2,7 @@ import Vue from 'vue'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueLazyLoad from 'vue-lazyload'
 import App from './App.vue'
 // import env from './env'
 
@@ -32,6 +33,9 @@ axios.interceptors.response.use(function(response){
 })
 
 Vue.use(VueAxios,axios);    //挂载上去后我们待会发请求就可以通过js发请求了
+Vue.use(VueLazyLoad,{   // 指定一个全局的配置 根据项目情况进行配置
+    loading:'/imgs/loading-svg/loading-bars.svg' // 图片在加载的时候会有一个loading的动画
+})
 Vue.config.productionTip = false    //生产方式的提示
 
 new Vue({

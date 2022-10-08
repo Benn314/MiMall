@@ -38,5 +38,7 @@ export default {
 
 <style lang="scss">
 @import './assets/scss/reset.scss';
+@import './assets/scss/config.scss';
+@import './assets/scss/button.scss'; // 也可以放在modal.vue里面 但我们在modal之外可能还会用到此组件 故放在App.vue全局里
 
 </style>

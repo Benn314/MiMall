@@ -18,3 +18,14 @@
     width: $w;
     height: $h;
 }
+
+//为弹框icon图标设计的函数
+@mixin positionImg($pos:absolute,$top:0,$right:0,$w:0,$h:0,$img:''){ //$img必须给默认值
+    position: $pos;
+    top:$top;
+    right:$right;
+    width: $w;
+    height: $h;
+    background: url($img) no-repeat center;
+    background-size: contain; //可以指定也可以传值
+}
