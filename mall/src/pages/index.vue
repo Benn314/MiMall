@@ -45,7 +45,7 @@
                 </div>
                 <swiper v-bind:options="swiperOption" >
                     <swiper-slide v-for="(item,index) in slideList" :key="index">
-                        <a :href="'/#/product'+item.id">
+                        <a :href="'/#/product/'+item.id">
                             <img :src="item.img" alt="">
                         </a>
                     </swiper-slide>
@@ -63,7 +63,7 @@
             </div>
             <!-- 广告位的缩写 -->
             <div class="ads-box1">
-                <a v-bind:href="'/#/product'+item.id" v-for="(item,index) in adsList" v-bind:key="index">
+                <a v-bind:href="'/#/product/'+item.id" v-for="(item,index) in adsList" v-bind:key="index">
                     <!-- 用v-lazy后 它会自动给我们封装一个src 所以这里不用写 -->
                     <img v-lazy="item.img" alt="">
                     <!-- 如果我们没有v-lazy的话 用jquery怎么做呢？加data-img 将data-img值取出来赋值到src 
@@ -74,7 +74,7 @@
                 </a>
             </div>
             <div class="banner">
-                <a href="'/#/product'30">
+                <a href="'/#/product/'30">
                 <!-- 注意 凡是指令里面肯定是变量 类型是字符串的话需要用单引号括起来字符串-->
                     <img v-lazy="'/imgs/banner-1.png'" alt="">
                 </a>

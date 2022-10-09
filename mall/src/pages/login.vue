@@ -38,7 +38,7 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
+import { mapActions } from 'vuex'; // 这里是解构
 export default {
   name: 'login',
   data(){ // data要切记不要使用data: 这样是全局声明 会有问题 造成页面和页面之间以及页面和组件之间的数据串用 要声明成局部的对象
@@ -60,8 +60,8 @@ export default {
         // this.$cookie.set('userId',res.id,{expires:'Session'});
         this.$cookie.set('userId',res.id,{expires:'1M'}); // 这里cookie设置一个月过期
         // to-do 保存用户名
-        // this.$store.dispatch('saveUserName',res.username);
-        // this.saveUserName(res.username);
+        // this.$store.dispatch('saveUserName', res.username);
+        this.saveUserName(res.username);
         // this.$router.push({
         //   name:'index',
         //   params:{
@@ -72,7 +72,8 @@ export default {
          this.$router.push('/index');
       })
     },
-    // ...mapActions(['saveUserName']),
+    ...mapActions(['saveUserName']), // 解构成一个方法
+    // 当你变量方法太多的时候 可以用mapActions来替代 它其实就是解构出来换成mapActions
     register(){
       this.axios.post('/user/register',{
         // username password随机写 便可以注册

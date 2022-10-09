@@ -10,7 +10,7 @@ export default {
   name: 'app',
   data(){
     return {
-      res:{}
+      // res:{}
     }
   },
   mounted(){
@@ -30,9 +30,26 @@ export default {
     //   this.res = res;
     // });
     // 3.本地集成mockjs（npm插件来着）实现数据mock
-    this.axios.get('/user/login').then((res)=>{
-      this.res = res;
-    });  }
+      // this.axios.get('/user/login').then((res)=>{
+      //   this.res = res;
+      // });
+      this.getUser();
+      this.getCartCount();
+    },
+    methods: {
+      getUser(){
+        this.axios.get('/user').then((res)=>{
+          // to-do 保存到vuex里面
+          this.$store.dispatch('saveUserName', res.username);
+        })
+      },
+      getCartCount(){
+        this.axios.get('/carts/products/sum').then((res)=>{
+          // to-do 保存到vuex里面
+          this.$store.dispatch('saveCartCount', res); //为什么这里只丢res？因为通过标头预览cartCount的sum只有因为data变量 
+        })
+      }
+    },
 }
 </script>
 

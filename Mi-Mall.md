@@ -1227,9 +1227,113 @@ expires 到期；有效期
 
 表单提交首选post
 
+​	
+
 ## 6-2 拉取用户信息
 
+登录和购物车本身是在同一个组件内部NavHeader里面的 那我们是不是要把结果放在NavHeader里面呢？不建议用户接口信息放在NavHeader里 为什么呢？ 如果你的页面没有登录 那么我们把这个接口放在这个里面没登陆  其实也没有意义 因为放进来还是一样 username是空 本身你没有登录的话 拉取也是空 最终还是要在登录页面把数据把用户名存入进去 存入到vuex里面去 在这把它拉取出来 那我们这里就建议放在App.vue里面 那我们只需要在这个入口的地方获取一次拉取一次我们的用户信息和购物车商品数量 然后在NavHeader里面 从vuex里面取一次就ok了
 
+ 命名是小驼峰命名 拉取数据一般是get  推送数据是post  删除数据可能是post可能是dl/delete都可以
+
+/#/ 这种路由就是哈希路由
+
+JSESSIONID是后端为了识别前端所写的cookie 不是前端的优化剂 useId是前端写的
+
+​	
+
+# 第七章 Vuex集成
+
+## 7-1 初步了解Vuex
+
+vuex是转为vue打造的状态机 帮助我们前端组件之间做数据传输和数据共享 双向绑定只停留在我们的表单层面 只有表单这种视图才是双向绑定 组件之间其实都是单项流通的 两组件之间要共用同一变量或其他数据等就需要用到数据共享技术 cookie/slowly当然也可以实现 但vuex框架最为成熟 达到复用和共享的目的
+
+vuex是MVM框架 模型视图视图模型 现在目前主流的框架都是状态管理框架 vuex便是
+
+像以前都是改变dom 现在是状态的方式通过结合我们的虚拟dom这种方式去实现
+
+![image-20221009094418383](Mi-Mall.assets/image-20221009094418383.png)
+
+![image-20221009095207004](Mi-Mall.assets/image-20221009095207004.png)
+
+vuex只管理这两步
+
+![image-20221009095821828](Mi-Mall.assets/image-20221009095821828.png)
+
+至于变量怎么渲染到视图里面去的 这个还是由我们框架来处理 跟vuex没有关系 vuex只负责数据的传输和共享
+
+用this.$store的方式来获取我们这个vuex的这种状态
+
+![image-20221009100117789](Mi-Mall.assets/image-20221009100117789.png)
+
+mapstate辅助函数 帮助我们简写变量
+
+![image-20221009100232427](Mi-Mall.assets/image-20221009100232427.png)
+
+Getter是对状态业务的处理比如返回一个数组 这个数组里面由脏数据我们不要 可以用Getter进行过滤 但其实你知道的 不用Getter也能进行过滤 我们在渲染的时候也可以把这个数组重新给它处理一遍
+
+![image-20221009100600889](Mi-Mall.assets/image-20221009100600889.png)
+
+![image-20221009100714604](Mi-Mall.assets/image-20221009100714604.png)
+
+actions内置context 也就是上下文对象 通过context去提交我们的commit方法
+
+![image-20221009100850138](Mi-Mall.assets/image-20221009100850138.png)
+
+通过dispatch去派发Action
+
+做到大型、超大型项目后就需要Module进行分模块了
+
+![image-20221009101421032](Mi-Mall.assets/image-20221009101421032.png)
+
+当我们状态改变的以后 它跟组件之间有延迟的时候大家记得用computed这种计算属性，也就是说数据又延迟的时候 你获取这个状态是没有用的 你获取的时候因为页面本身已经渲染完了 你才获取这个状态 它肯定就晚了 那么当你数据有延迟的时候 大家记得用computed计算属性
+
+​	
+
+## 7-2 Vuex框架搭建
+
+组件import的话一定要加./ 不然当作插件去node_module里面去查找
+
+新建store目录 index.js mutations.js action.js 绑定到main.js 
+
+![image-20221009110945957](Mi-Mall.assets/image-20221009110945957.png)
+
+框架搭建完成后 接下来就是实战了 怎么保存变量 怎么读取数据共享
+
+​	
+
+## 7-3 Vuex实战应用
+
+payload：有效载荷
+
+payload data:
+
+> 记载着信息的那部分数据。通常在传输数据时，为了使数据传输更可靠，要把[原始数据](https://baike.baidu.com/item/原始数据?fromModule=lemma_inlink)分批传输，并且在每一批数据的头和尾都加上一定的辅助信息，比如这一批数据量的大小，校验位等，这样就相当于给已经分批原始数据加一些外套，这些外套起到标示作用，使得原始数据不易丢失。一批数据加上它的“外套”，就形成了传输通道中基本的传输单元，叫做[数据帧](https://baike.baidu.com/item/数据帧?fromModule=lemma_inlink)或者数据包（有的地方数据帧和数据包不是同一概念比如[网络传输](https://baike.baidu.com/item/网络传输?fromModule=lemma_inlink)）。这些[数据帧](https://baike.baidu.com/item/数据帧?fromModule=lemma_inlink)中的记录信息的原始数据就是有效载荷数据，即payload data。
+
+​	
+
+login登录后不显示username 存在延迟的情况：
+
+我们组件加载 先加载App.vue 后加载NavHeader 而从NavHeader 中得知 data(){}里的username:this.$store.state.username为纯渲染，没有这个请求时间 而我们App.vue进去后会执行这个接口 很明显我们这个接口的调用是需要花时间的 先读取这个变量的时候会发现是空 当空执行完之后才执行完这个方法 
+
+![image-20221009152852150](Mi-Mall.assets/image-20221009152852150.png)
+
+这个方法回来以后 才把这个里面去存值 所以它中间有一个误差 先取的值后才返回的这个数据 就晚了
+
+那这个问题也好办 我们需要通过这个computed计算属性来解决 当变量读取的时候没有 那么它会重新再计算一次 重新再调用一次这个方法 所以说我们这个需要把username定成一个computed的函数
+
+![image-20221009153422094](Mi-Mall.assets/image-20221009153422094.png)
+
+设置完毕后 我们刷新登录后的网页 username不会消失 虽然会有一闪的时刻没有username 是因为接口调用还没回来 尚且没值 接口回来后就有值了 但如果接口不回来 上面username就会一直没有值
+
+![image-20221009161057322](Mi-Mall.assets/image-20221009161057322.png)
+
+如果我们这里没有用computed计算则可以用mapActions进行简写变量 用map state辅助取做这个渲染
+
+​	
+
+# 第八章 产品站页面
+
+## 8-1 产品站参数组件实现
 
 
 

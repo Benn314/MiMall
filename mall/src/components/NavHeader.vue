@@ -14,7 +14,7 @@
                     <a href="javascript:;" v-if="!username" @click="login">登录</a>
                     <a href="javascript:;" v-if="username">我的订单</a>
                     <!-- goToCart() 没有参数的话括号都可以不用写 写成goToCart -->
-                    <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车</a>                
+                    <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车({{cartCount}})</a>                
                 </div>
             </div>
         </div>
@@ -161,11 +161,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
     name: 'nav-header',
     data(){
-        return{
-            username:'',
+        return{   
+            // username:this.$store.state.username,         
             phoneList:[]
         }
     },
@@ -176,7 +177,15 @@ export default {
     //         return '￥' + val.toFixed(2) + '元';
     //     }
     // },
-    cpmputed:{
+    computed:{
+        // username(){
+        //     return this.$store.state.username;
+        // },
+        // cartCount(){
+        //     return this.$store.state.cartCount;
+        // }
+        // 上面5行代码可以简写为下面一行代码 maoState辅助函数开发替代简写
+        ...mapState(['username','cartCount'])
     },
     mounted() {
         this.getProductList();
