@@ -238,6 +238,7 @@ export default {
                     background-color: #FF6600;
                     text-align: center;
                     color:#ffffff;
+                    margin-right: 0;
                     .icon-cart{ // span可以用background来放置我们的图标
                         // display: inline-block;
                         // width:16px;
