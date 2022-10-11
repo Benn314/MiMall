@@ -240,17 +240,18 @@ export default {
 
             })
         },
-        addCart(){
+        addCart(id){
             // 等把登录模块做出来后 再搞添加购物车
-            this.showModal=true;
-            // this.axios.post('/carts',{
-            //     productId:id,
-            //     selected: true
-            // }).then(()=>{
-
-            // }).catch(()=>{ // 因为我们还未登录 所以可能出现提交不成功 先用catch捕获异常
-            //     this.showModal = true;
-            // })
+            
+            this.axios.post('/carts',{
+                productId:id,
+                selected: true
+            }).then((res)=>{
+                this.showModal=true;
+                this.$store.dispatch('saveCartCount', res.cartTotalQuantity); // 获取购物车总数量
+            }).catch(()=>{ // 因为我们还未登录 所以可能出现提交不成功 先用catch捕获异常
+                this.showModal = true;
+            })
         },
         goToCart(){
             this.$router.push('/cart')

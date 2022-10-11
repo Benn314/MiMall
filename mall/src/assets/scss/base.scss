@@ -15,3 +15,17 @@ input{
     box-sizing: border-box; // 设置核模型为IE核模型 宽度就包括了边框值、内填充等等
     font-size: 14px;
 }
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.clearfix:before,.clearfix:after{
+    content:' ';
+    display:table;
+}
+.clearfix:after{
+    clear:both; // 这样可以直接用在任何你想要添加浮动的位置里面去添加class 来达到清除目的
+    // 一旦你加了浮动后没有清除浮动 它就会塌陷 塌陷之后元素就会冲下来了
+}
