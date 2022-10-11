@@ -38,13 +38,13 @@ export default {
     },
     methods: {
       getUser(){
-        this.axios.get('/user').then((res)=>{
+        this.axios.get('/user').then((res={})=>{ // 获取user信息小bug 这里我们需要给res加个默认值 不然如果网页是未登录的状态的话 代码可能会报错
           // to-do 保存到vuex里面
           this.$store.dispatch('saveUserName', res.username);
         })
       },
       getCartCount(){
-        this.axios.get('/carts/products/sum').then((res)=>{
+        this.axios.get('/carts/products/sum').then((res=0)=>{ // 等同41行代码注释
           // to-do 保存到vuex里面
           this.$store.dispatch('saveCartCount', res); //为什么这里只丢res？因为通过标头预览cartCount的sum只有因为data变量 
         })

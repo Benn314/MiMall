@@ -2,7 +2,9 @@
 <!-- 动态绑定class is_fixed -->
   <div class="nav-bar" :class="{'is_fixed':isFixed}">
     <div class="container">
-      <div class="pro-title">小米8</div>
+      <div class="pro-title">
+        {{title}}
+      </div>
       <div class="pro-param">
         <a href="javascript:;">概述</a><span>|</span>
         <a href="javascript:;">参数</a><span>|</span>
@@ -23,6 +25,9 @@
 <script>
 export default {
   name: "nav-bar",
+  props:{
+    title:String
+  },
   data() {
     return {
         isFixed:false
@@ -38,7 +43,9 @@ export default {
         this.isFixed = scrollTop > 152 ? true : false;
     }
   },
-  destroyed() {
+  // vue3.0中destroyed 生命周期选项被重命名为 unmounted
+  // beforeDestroy 生命周期选项被重命名为 beforeUnmount
+  unmounted() {
     window.removeEventListener('scroll',this.initHeight,false) // 第三个参数 true是捕获 false是冒泡
   },
 };
