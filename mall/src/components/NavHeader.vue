@@ -272,41 +272,41 @@ export default {
                 // justify-content: space-between;
                 // align-items: center; // 垂直方向居中
                 @include flex(); // 调用mixin里的flex方法
-                .header-logo{
-                    display: inline-block;
-                    width:55px;
-                    height: 55px;
-                    // 看不见的原因是 白色和白色重叠了 所以看不见
-                    background-color: #FF6600;
-                    a{
-                        display: inline-block;
-                        width:110px;
-                        height:55px;
-                        &:before{ //伪类 这里是两张图片 既然是图片 我们没有内容那一定要占位 用content
-                            content: ' '; // 这很重要
-                            // display: inline-block;
-                            // width:55px;
-                            // height: 55px;
-                            // background: url('/imgs/mi-logo.png') no-repeat center;
-                            // background-size: 55px;
-                            @include bgImg(55px,55px,'/imgs/mi-logo.png',55px);
-                            transition: margin .2s;
-                        }
-                        &:after{ //伪类 这里是两张图片 既然是图片 我们没有内容那一定要占位 用content
-                            content: ' '; // 这很重要 要去占位 不然伪类不生效
-                            // display: inline-block;
-                            // width:55px;
-                            // height: 55px;
-                            // background: url('/imgs/mi-home.png') no-repeat center;
-                            // background-size: 55px;
-                            @include bgImg(55px,55px,'/imgs/mi-home.png',55px);
-                        }
-                        &:hover:before{
-                            margin-left: -55px; // 为什么这里是-55px 因为header-logo的显示位置是固定的 我们需要使mi-home.logo向左移动-55px 才能完美到达显示位置
-                            transition: margin .2s; // 也可以把margin改为all 指定所有元素过渡
-                        }
-                    }
-                }
+                // .header-logo{
+                //     display: inline-block;
+                //     width:55px;
+                //     height: 55px;
+                //     // 看不见的原因是 白色和白色重叠了 所以看不见
+                //     background-color: #FF6600;
+                //     a{
+                //         display: inline-block;
+                //         width:110px;
+                //         height:55px;
+                //         &:before{ //伪类 这里是两张图片 既然是图片 我们没有内容那一定要占位 用content
+                //             content: ' '; // 这很重要
+                //             // display: inline-block;
+                //             // width:55px;
+                //             // height: 55px;
+                //             // background: url('/imgs/mi-logo.png') no-repeat center;
+                //             // background-size: 55px;
+                //             @include bgImg(55px,55px,'/imgs/mi-logo.png',55px);
+                //             transition: margin .2s;
+                //         }
+                //         &:after{ //伪类 这里是两张图片 既然是图片 我们没有内容那一定要占位 用content
+                //             content: ' '; // 这很重要 要去占位 不然伪类不生效
+                //             // display: inline-block;
+                //             // width:55px;
+                //             // height: 55px;
+                //             // background: url('/imgs/mi-home.png') no-repeat center;
+                //             // background-size: 55px;
+                //             @include bgImg(55px,55px,'/imgs/mi-home.png',55px);
+                //         }
+                //         &:hover:before{
+                //             margin-left: -55px; // 为什么这里是-55px 因为header-logo的显示位置是固定的 我们需要使mi-home.logo向左移动-55px 才能完美到达显示位置
+                //             transition: margin .2s; // 也可以把margin改为all 指定所有元素过渡
+                //         }
+                //     }
+                // }
                 .header-menu{
                     display: inline-block;
                     width: 643px;

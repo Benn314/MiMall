@@ -1,3 +1,7 @@
+// ./只是当前目录 不加./也可以检索到路径 不加./没有提示 加了有提示 更方便书写和查找
+// 加./和不加./的区别 一般我们通过js import 导入的时候会把它认为是一个插件（npm里的插件）默认去外面的node modules里面去查找
+// 这是不带./的 如果带了./优先去你当前自己的目录去查找 认为它是外面自己定义的文件
+@import './mixin.scss'; 
 .container{
     position: relative; // 做login的右边界
     width: 1226px;
@@ -28,4 +32,40 @@ input{
 .clearfix:after{
     clear:both; // 这样可以直接用在任何你想要添加浮动的位置里面去添加class 来达到清除目的
     // 一旦你加了浮动后没有清除浮动 它就会塌陷 塌陷之后元素就会冲下来了
+}
+// 公共logo
+.header-logo{
+    display: inline-block;
+    width:55px;
+    height: 55px;
+    // 看不见的原因是 白色和白色重叠了 所以看不见
+    background-color: #FF6600;
+    a{
+        display: inline-block;
+        width:110px;
+        height:55px;
+        &:before{ //伪类 这里是两张图片 既然是图片 我们没有内容那一定要占位 用content
+            content: ' '; // 这很重要
+            // display: inline-block;
+            // width:55px;
+            // height: 55px;
+            // background: url('/imgs/mi-logo.png') no-repeat center;
+            // background-size: 55px;
+            @include bgImg(55px,55px,'/imgs/mi-logo.png',55px);
+            transition: margin .2s;
+        }
+        &:after{ //伪类 这里是两张图片 既然是图片 我们没有内容那一定要占位 用content
+            content: ' '; // 这很重要 要去占位 不然伪类不生效
+            // display: inline-block;
+            // width:55px;
+            // height: 55px;
+            // background: url('/imgs/mi-home.png') no-repeat center;
+            // background-size: 55px;
+            @include bgImg(55px,55px,'/imgs/mi-home.png',55px);
+        }
+        &:hover:before{
+            margin-left: -55px; // 为什么这里是-55px 因为header-logo的显示位置是固定的 我们需要使mi-home.logo向左移动-55px 才能完美到达显示位置
+            transition: margin .2s; // 也可以把margin改为all 指定所有元素过渡
+        }
+    }
 }

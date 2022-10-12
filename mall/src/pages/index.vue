@@ -242,7 +242,6 @@ export default {
         },
         addCart(id){
             // 等把登录模块做出来后 再搞添加购物车
-            
             this.axios.post('/carts',{
                 productId:id,
                 selected: true
