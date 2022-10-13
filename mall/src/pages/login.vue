@@ -39,6 +39,7 @@
 
 <script>
 import { mapActions } from 'vuex'; // 这里是解构
+// import { Message } from 'element-ui'
 export default {
   name: 'login',
   data(){ // data要切记不要使用data: 这样是全局声明 会有问题 造成页面和页面之间以及页面和组件之间的数据串用 要声明成局部的对象
@@ -81,8 +82,8 @@ export default {
         password:'Ben1',
         email:'Ben1@163.com'
       }).then(()=>{
-        // this.$message.success('注册成功');
-        alert('注册成功');
+        this.$message.success('注册成功'); // 添加到prototype原型中的了
+        // Message.success('注册成功'); // 需要在本组件打开import Message
       })
     }
   }

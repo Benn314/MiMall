@@ -4,6 +4,8 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueLazyLoad from 'vue-lazyload'
 import VueCookie from 'vue-cookie'
+import { Message } from 'element-ui' // 还要再引入其样式
+import 'element-ui/lib/theme-chalk/index.css'
 import store from './store' //默认会读取index.js入口文件 所以可以简写
 import App from './App.vue'
 // import env from './env'
@@ -35,16 +37,19 @@ axios.interceptors.response.use(function(response){
         }
         return Promise.reject(res);
     }else{
-        alert(res.msg);
+        // alert(res.msg);
+        Message.warning(res.msg);
         return Promise.reject(res);
     }
 })
 
 Vue.use(VueAxios,axios);    //挂载上去后我们待会发请求就可以通过js发请求了
 Vue.use(VueCookie);
+Vue.use(Message); 
 Vue.use(VueLazyLoad,{   // 指定一个全局的配置 根据项目情况进行配置
     loading:'/imgs/loading-svg/loading-bars.svg' // 图片在加载的时候会有一个loading的动画
 })
+Vue.prototype.$message = Message;
 Vue.config.productionTip = false    //生产方式的提示
 
 new Vue({

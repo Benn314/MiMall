@@ -20,7 +20,7 @@
           <ul class="cart-item-list">
             <li class="cart-item" v-for="(item,index) in list" v-bind:key="index">
               <div class="item-check">
-                <span class="checkbox" :class="{'checked':item.productSelected}"></span>
+                <span class="checkbox" :class="{'checked':item.productSelected}" @click="updateCart(item)"></span>
               </div>
               <div class="item-name">
                 <img v-lazy="item.productMainImage" alt="">
@@ -29,13 +29,16 @@
               <div class="item-price">{{item.productPrice}}</div>
               <div class="item-num">
                 <div class="num-box">
-                  <a href="javascript:;">-</a>
+                  <a href="javascript:;" @click="updateCart(item,'-')">-</a>
                   <span>{{item.quantity}}</span>
-                  <a href="javascript:;">+</a>
+                  <a href="javascript:;" @click="updateCart(item,'+')">+</a>
                 </div>
               </div>
               <div class="item-total">{{item.productTotalPrice}}</div>
-              <div class="item-del"></div>
+              <!-- <div class="item-del" @click="delProduct(item)"></div>  -->
+              <!-- 加个删除时的提醒弹框
+              -->
+              <div class="item-del" @click="delProduct_confirm(item)"></div>
             </li>
             <!-- <li class="cart-item">
               <div class="item-check">
@@ -73,31 +76,50 @@
     </div>
     <service-bar></service-bar>
     <nav-footer></nav-footer>
+    <modal 
+        title="提示" 
+        btnType="3" 
+        modalType="middle" 
+        :showModal="showModal"
+        @submit="delProduct(del_item)"
+        @cancel="showModal=false"
+    >
+        <!-- 新版本用template嵌套<v-slot></v-slot> -->
+        <template v-slot:body>
+            <p>是否要删除该商品？</p>
+        </template>
+    </modal>
   </div>
 </template>
 <script>
   import OrderHeader from './../components/OrderHeader'
   import ServiceBar from './../components/ServiceBar'
   import NavFooter from './../components/NavFooter'
+  import Modal from './../components/Modal'
+  import { Message } from 'element-ui'
   export default{
     name:'index',
     components:{
       OrderHeader,
       ServiceBar,
-      NavFooter
+      NavFooter,
+      Modal
     },
     data(){
       return {
         list:[], // 商品列表
         allChecked:false, // 是否全选
         cartTotalPrice:0, // 商品总金额
-        checkedNum:0 // 选中商品数量
+        checkedNum:0, // 选中商品数量
+        showModal:false,
+        del_item:String
       }
     },
     mounted() { // 用来初始化事件方法
         this.getCartList();
     },
     methods:{
+        // 获取购物车列表
         getCartList(){
             this.axios.get('/carts').then((res)=>{
                 this.list = res.cartProductVoList || [];
@@ -108,22 +130,78 @@
                 this.checkedNum = this.list.filter(item=>item.productSelected).length; // 过滤productSelected选中的进行返回 这是es6一个简写的语法
             })
         },
+        // 更新购物车数量和购物车单选状态
+        updateCart(item,type){
+            let quantity = item.quantity,
+                selected = item.productSelected;
+            if(type == '-'){
+                if(quantity == 1){
+                    // 信息提示可以用info框/warning框
+                    Message.warning('商品至少保留一件');
+                    return;
+                }
+                --quantity;
+            }else if(type == '+'){
+                if(quantity > item.productStock){
+                    Message.warning('购买数量不能超过库存数量');
+                    return;
+                }
+                ++quantity;
+            }else{ // 商品单选
+                selected = !item.productSelected;
+            }
+            this.axios.put(`/carts/${item.productId}`,{
+                quantity,
+                selected
+            }).then((res)=>{
+                this.renderData(res);
+            })
+        },
+        // 删除购物车商品
+        delProduct(item){
+            this.axios.delete(`/carts/${item.productId}`).then((res)=>{
+                // Message.success('删除成功'); // 使用方式一
+                this.$message.success('删除成功'); // 使用方式二
+                this.renderData(res);
+                this.showModal=false;
+            })
+        },
+        // submit确定键：删除商品并返回购物车页面
+        // delProduct_submit(){
+        //     this.delProduct(this.del_item);
+        //     this.showModal=false;
+        // },
+        // 捕获v-for的当前点击的item值 赋值给data(){}局部变量 并开启弹框
+        delProduct_confirm(item){
+            this.del_item=item;
+            this.showModal=true;
+        },
+        // 控制全选功能
         toggleAll(){
             let url = this.allChecked?'/carts/unSelectAll':'/carts/selectAll';
             this.axios.put(url).then((res)=>{
                 this.renderData(res);
             })
         },
+        // 公共赋值 可用于重新渲染
         renderData(res){
             this.list = res.cartProductVoList || [];
             this.allChecked = res.selectedAll;
             this.cartTotalPrice = res.cartTotalPrice;
             this.checkedNum = this.list.filter(item=>item.productSelected).length;
         },
-      // 购物车下单
-      order(){
-        this.$router.push('/order/confirm');
-      }
+
+        // 购物车下单
+        // 用过滤filter/map遍历/every都可以实现 只要扫描到有一件商品是选中状态就可以提交结算
+        order(){
+            // this.$router.push('/order/confirm');
+            let isCheck = this.list.every(item=>!item.productSelected); // every返回的是Boolean布尔值
+            if(isCheck){
+                Message.warning('请选择至少一件商品');
+            }else{
+                this.$router.push('/order/confirm');
+            }
+        }
     }
   }
 </script>

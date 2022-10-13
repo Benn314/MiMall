@@ -12,9 +12,9 @@
               <swiper-slide><img src="/imgs/detail/phone-3.jpg" alt=""></swiper-slide>
               <swiper-slide><img src="/imgs/detail/phone-4.jpg" alt=""></swiper-slide>
               <!-- Optional controls -->
-              <!-- <template v-slot="pagination">
+              <template v-slot:pagination>
                 <div class="swiper-pagination"></div>
-              </template> -->
+              </template>
           </swiper>
         </div>
         <div class="content">
