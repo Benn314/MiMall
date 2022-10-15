@@ -58,19 +58,19 @@ export default {
         username, // es6语法规范简写
         password
       }).then((res)=>{
-        // this.$cookie.set('userId',res.id,{expires:'Session'});
-        this.$cookie.set('userId',res.id,{expires:'1M'}); // 这里cookie设置一个月过期
+        this.$cookie.set('userId',res.id,{expires:'Session'});
+        // this.$cookie.set('userId',res.id,{expires:'1M'}); // 这里cookie设置一个月过期
         // to-do 保存用户名
         // this.$store.dispatch('saveUserName', res.username);
         this.saveUserName(res.username);
-        // this.$router.push({
-        //   name:'index',
-        //   params:{
-        //     from:'login'
-        //   }
-        // });
+        this.$router.push({
+          name:'index',
+          params:{
+            from:'login'
+          }
+        });
         // this.res = res;
-         this.$router.push('/index');
+        //  this.$router.push('/index');
       })
     },
     ...mapActions(['saveUserName']), // 解构成一个方法
@@ -82,7 +82,7 @@ export default {
         password:'Ben1',
         email:'Ben1@163.com'
       }).then(()=>{
-        this.$message.success('注册成功'); // 添加到prototype原型中的了
+        this.$message.success('注册成功'); // 添加到prototype原型中的了 1014
         // Message.success('注册成功'); // 需要在本组件打开import Message
       })
     }

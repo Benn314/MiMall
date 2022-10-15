@@ -48,3 +48,6 @@ Xxxxxx
 ​	
 
 - [区块链，智能合约 & 全栈 Web3 开发](https://github.com/smartcontractkit/full-blockchain-solidity-course-js)
+- [资深前端工程师带你领略前端工程之美：研发过程前端工程](https://www.bilibili.com/video/BV1hB4y1n7rD/?spm_id_from=333.788&vd_source=1f9072e850dde202d6ddd4c60d9d334d)
+- [Full Tutorial Udacity - Data Structures and Algorithms](https://www.youtube.com/watch?v=unaweoIeYxQ&list=PLvOhoWQ5P66HFzpQXO3HZxBtc8n2aB_9v)
+

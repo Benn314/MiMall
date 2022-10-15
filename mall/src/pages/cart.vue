@@ -137,13 +137,14 @@
             if(type == '-'){
                 if(quantity == 1){
                     // 信息提示可以用info框/warning框
-                    Message.warning('商品至少保留一件');
+                    Message.warning('商品至少保留一件'); //1014
+                    // Message.info('商品至少保留一件');
                     return;
                 }
                 --quantity;
             }else if(type == '+'){
                 if(quantity > item.productStock){
-                    Message.warning('购买数量不能超过库存数量');
+                    Message.warning('购买数量不能超过库存数量'); //1014
                     return;
                 }
                 ++quantity;
@@ -161,7 +162,7 @@
         delProduct(item){
             this.axios.delete(`/carts/${item.productId}`).then((res)=>{
                 // Message.success('删除成功'); // 使用方式一
-                this.$message.success('删除成功'); // 使用方式二
+                this.$message.success('删除成功'); // 使用方式二 1014
                 this.renderData(res);
                 this.showModal=false;
             })
@@ -197,7 +198,7 @@
             // this.$router.push('/order/confirm');
             let isCheck = this.list.every(item=>!item.productSelected); // every返回的是Boolean布尔值
             if(isCheck){
-                Message.warning('请选择至少一件商品');
+                Message.warning('请选择至少一件商品'); //1014
             }else{
                 this.$router.push('/order/confirm');
             }

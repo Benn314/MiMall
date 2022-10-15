@@ -12,6 +12,7 @@
                 <div class="topbar-user">
                     <a href="javascript:;" v-if="username">{{username}}</a>
                     <a href="javascript:;" v-if="!username" @click="login">登录</a>
+                    <a href="javascript:;" v-if="username" @click="logout">退出</a>
                     <a href="javascript:;" v-if="username">我的订单</a>
                     <!-- goToCart() 没有参数的话括号都可以不用写 写成goToCart -->
                     <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车({{cartCount}})</a>                
@@ -193,6 +194,10 @@ export default {
     },
     mounted() {
         this.getProductList();
+        let params = this.$route.params;
+        if(params && params.from == 'login'){ // 证明我们是从登录页面过来的
+            this.getCartCount();
+        }
     },
     methods: {
         login(){
@@ -214,6 +219,28 @@ export default {
         currency(val) {
             if(!val) return '0.00';
             return '￥' + val.toFixed(2) + '元';
+        },
+        getCartCount(){
+            this.axios.get('/carts/products/sum').then((res=0)=>{ // 等同41行代码注释
+            // to-do 保存到vuex里面
+            this.$store.dispatch('saveCartCount', res); //为什么这里只丢res？因为通过标头预览cartCount的sum只有因为data变量 
+            })
+        },
+        logout(){
+            // 这里我们从get()方法改成post()方法调用
+            this.axios.post('/user/logout').then(()=>{
+                // this.phoneList = res.list;
+                // 这里的话我们不需要返回值 只要它成功进来就说明它已经执行成功了
+                this.$message.success('退出成功') //1014
+                // 到这还没做完 只是后端是数据清空了 前端的用户名和购物车数量还没有进行重新的数据渲染 我们需要重新渲染一下
+                // 删除cookie里的相关信息
+                this.$cookie.set('userId','',{expires:'-1'});
+                // 删除vuex里的用户名
+                this.$store.dispatch('saveUserName', '');
+                // 删除vuex里的购物车数量
+                this.$store.dispatch('saveCartCount', '0');
+
+            })
         },
         goToCart(){
             this.$router.push('/cart');

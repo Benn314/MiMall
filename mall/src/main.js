@@ -45,7 +45,8 @@ axios.interceptors.response.use(function(response){
 
 Vue.use(VueAxios,axios);    //挂载上去后我们待会发请求就可以通过js发请求了
 Vue.use(VueCookie);
-Vue.use(Message); 
+// Vue.use(Message); //引入element ui后，刷新页面总是会弹出提示框 使用下一行代码形式则问题解决
+Vue.component(Message.name, Message);
 Vue.use(VueLazyLoad,{   // 指定一个全局的配置 根据项目情况进行配置
     loading:'/imgs/loading-svg/loading-bars.svg' // 图片在加载的时候会有一个loading的动画
 })
