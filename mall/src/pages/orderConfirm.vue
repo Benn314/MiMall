@@ -309,7 +309,7 @@ export default{
       }).then((res)=>{
         this.$router.push({
           path:'/order/pay',
-          query:{
+          query:{ //通过query进行传参
             orderNo:res.orderNo 
           }
         })
