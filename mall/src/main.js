@@ -41,6 +41,11 @@ axios.interceptors.response.use(function(response){
         Message.warning(res.msg);
         return Promise.reject(res);
     }
+},(error)=>{
+    let res = error.response;
+    // alert(res);
+    Message.error(res.data.message);
+    return Promise.reject(res);
 })
 
 Vue.use(VueAxios,axios);    //挂载上去后我们待会发请求就可以通过js发请求了
