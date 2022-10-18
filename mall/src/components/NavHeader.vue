@@ -13,7 +13,7 @@
                     <a href="javascript:;" v-if="username">{{username}}</a>
                     <a href="javascript:;" v-if="!username" @click="login">登录</a>
                     <a href="javascript:;" v-if="username" @click="logout">退出</a>
-                    <a href="javascript:;" v-if="username">我的订单</a>
+                    <a href="/#/order/list" v-if="username">我的订单</a>
                     <!-- goToCart() 没有参数的话括号都可以不用写 写成goToCart -->
                     <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车({{cartCount}})</a>                
                 </div>

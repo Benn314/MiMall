@@ -1,10 +1,10 @@
 <template>
   <div class="order-pay">
-    <!-- <order-header title="订单支付">
+    <order-header title="订单支付">
       <template v-slot:tip>
         <span>请谨防钓鱼链接或诈骗电话，了解更多</span>
       </template>
-    </order-header> -->
+    </order-header>
     <div class="wrapper">
       <div class="container">
         <div class="order-wrap">
@@ -74,7 +74,7 @@
 </template>
 <script>
 import QRCode from 'qrcode'
-// import OrderHeader from './../components/OrderHeader'
+import OrderHeader from './../components/OrderHeader'
 import ScanPayCode from './../components/ScanPayCode'
 // 场景：用户支付了订单但由于网络状态显示未支付
 // 解决：加一个弹框 让用户自己手动选择支付状态
@@ -97,7 +97,7 @@ export default{
     }
   },
   components:{
-    // OrderHeader,
+    OrderHeader,
     ScanPayCode,
     Modal
   },

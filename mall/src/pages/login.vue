@@ -78,9 +78,9 @@ export default {
     register(){
       this.axios.post('/user/register',{
         // username password随机写 便可以注册
-        username:'Ben1',
-        password:'Ben1',
-        email:'Ben1@163.com'
+        username:'Ben2',
+        password:'Ben2',
+        email:'Ben2@163.com'
       }).then(()=>{
         this.$message.success('注册成功'); // 添加到prototype原型中的了 1014
         // Message.success('注册成功'); // 需要在本组件打开import Message

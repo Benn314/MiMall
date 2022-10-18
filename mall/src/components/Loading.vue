@@ -1,6 +1,7 @@
 <template>
     <div class="loading">
         <!-- 为什么这里用/imgs/呢？要用/ 因为public是我们的根目录 用/即可访问 -->
+        <!-- svg是矢量图 它不会随着分辨率的大小 变大/缩小 而失真 -->
         <img src="/imgs/loading-svg/loading-bars.svg" alt="">
     </div>
 </template>
