@@ -51,7 +51,7 @@
             </div>
           </div>
           <el-pagination
-            v-if="false"
+            v-if="true"
             class="pagination"
             background
             layout="prev, pager, next"
@@ -60,14 +60,14 @@
             @current-change="handleChange"
             >
           </el-pagination>
-          <div class="load-more" v-if="showNextPage">
+          <div class="load-more" v-if="false">
               <el-button type="primary" :loading="loading" @click="loadMore">加载更多</el-button>
           </div>
           <div class="scroll-more"
             v-infinite-scroll="scrollMore"
-            infinite-scroll-disabled="busy"
+            infinite-scroll-disabled="true"
             infinite-scroll-distance="410"
-            v-if="true"
+            v-if="false"
           >
             <img src="/imgs/loading-svg/loading-spinning-bubbles.svg" alt="" v-show="loading">
           </div>
@@ -123,8 +123,10 @@
           }
         }).then((res)=>{
           this.loading = false;
-          // this.list = res.list; //会覆盖
-          this.list = this.list.concat(res.list); //数组拼接方法concat （this.list = res.list ）点击后loadMore使原先的pageNum+1 但原先的pageNum的页面数据会被覆盖掉 我们用拼接的方式便可以全部展示
+          this.list = res.list; //会覆盖 适用于el-pagination分页
+          // 适用于el-button和infiniteScroll分页
+          // this.list = this.list.concat(res.list); //数组拼接方法concat （this.list = res.list ）点击后loadMore使原先的pageNum+1 但原先的pageNum的页面数据会被覆盖掉 我们用拼接的方式便可以全部展示
+          this.total = res.total;
           this.showNextPage = res.hasNextPage;
           this.busy = false;
         }).catch(()=>{
